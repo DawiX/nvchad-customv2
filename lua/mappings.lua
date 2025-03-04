@@ -24,6 +24,7 @@ map("n", "<leader>aa", ":set ft=yaml.ansible<CR>", { desc = "Attach ansiblels ma
 map("n", "<leader>cw", ":cd %:p:h<CR>", { desc = "Change dir to dir of currently opened file" })
 map("n", "<leader>mr", ":CellularAutomaton make_it_rain<CR>", { desc = "Make it rain" })
 map("n", "<leader>fl", ":lua require('lint').try-lint()<cr>", { desc = "Force linting" })
+map("n", "<leader>gb", ":Gitsigns blame<cr>", { desc = "Git blame" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
