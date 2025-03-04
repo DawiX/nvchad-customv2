@@ -16,6 +16,24 @@ M.ui = {
     style = "default",
     lspkind_text = true,
   },
+  statusline = {
+    theme = "default",
+  },
+}
+
+M.term = {
+  sizes = { sp = 0.3, vsp = 0.5 },
+  float = {
+    relative = "editor",
+    row = 0.25,
+    col = 0.15,
+    width = 0.65,
+    height = 0.5,
+  },
+}
+
+M.colorify = {
+  enabled = true,
 }
 
 M.mason = {

@@ -6,27 +6,6 @@ local nomap = vim.keymap.del
 -- Disable default mappings
 nomap("n", "<C-n>") -- disabling NvimTreeToggle
 
--- Default overrides
-map("n", "<leader>v", function()
-  require("nvchad.term").new {
-    pos = "vsp",
-    size = 0.5,
-  }
-end, { desc = "terminal new vertical term" })
-
-map({ "n", "t" }, "<A-i>", function()
-  require("nvchad.term").toggle {
-    pos = "float",
-    id = "floatTerm",
-    float_opts = {
-      row = 0.25,
-      col = 0.15,
-      width = 0.65,
-      height = 0.5,
-    },
-  }
-end, { desc = "terminal toggle floating term" })
-
 -- VISUAL
 map("v", "vv", "<Esc>", { desc = "vv to leave visual mode" })
 map("v", "J", ":<C-u>silent! '<,'>move'>+1<CR>gv=gv", { desc = "Move highlight down" })
