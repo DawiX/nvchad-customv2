@@ -7,6 +7,7 @@ local servers = {
   terraformls = {},
   tflint = {},
   gopls = {},
+  golangci_lint_ls = {},
   bashls = {},
   ansiblels = {},
   dockerls = {},

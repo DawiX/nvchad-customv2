@@ -27,5 +27,7 @@ map("n", "<leader>fl", ":lua require('lint').try-lint()<cr>", { desc = "Force li
 map("n", "<leader>gb", ":Gitsigns blame<cr>", { desc = "Git blame" })
 map("n", "<leader>mc", ":MCstart<cr>", { desc = "Multicursors start" })
 
+map("n", "<leader>df", ":lua vim.diagnostic.open_float()<cr>", { desc = "LSP Diagnostics float" })
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
