@@ -21,3 +21,22 @@ vim.o.shell = "/opt/homebrew/bin/fish"
 
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
+
+-- nvim-tree git colors (runs after everything loads)
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.defer_fn(function()
+      local ok, colors = pcall(function()
+        return require("base46").get_theme_tb("base_30")
+      end)
+      if ok and colors then
+        vim.api.nvim_set_hl(0, "NvimTreeGitStagedIcon", { fg = colors.vibrant_green, bold = true })
+        vim.api.nvim_set_hl(0, "NvimTreeGitFileStagedHL", { fg = colors.vibrant_green, bold = true })
+        vim.api.nvim_set_hl(0, "NvimTreeGitDirtyIcon", { fg = colors.yellow, bold = true })
+        vim.api.nvim_set_hl(0, "NvimTreeGitFileDirtyHL", { fg = colors.yellow, bold = true })
+        vim.api.nvim_set_hl(0, "NvimTreeGitNewIcon", { fg = colors.vibrant_green, bold = true })
+        vim.api.nvim_set_hl(0, "NvimTreeGitFileNewHL", { fg = colors.vibrant_green, bold = true })
+      end
+    end, 100)
+  end,
+})
