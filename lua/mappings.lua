@@ -28,6 +28,8 @@ map("n", "<leader>gb", ":Gitsigns blame<cr>", { desc = "Git blame" })
 map("n", "<leader>mc", ":MCstart<cr>", { desc = "Multicursors start" })
 
 map("n", "<leader>df", ":lua vim.diagnostic.open_float()<cr>", { desc = "LSP Diagnostics float" })
+map("n", "<leader>ls", "<cmd>LspStop<cr>", { desc = "Stop all LSPs" })
+map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSPs" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")

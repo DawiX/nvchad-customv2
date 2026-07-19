@@ -3,6 +3,7 @@
 local configs = require "nvchad.configs.lspconfig"
 
 local servers = {
+  omnisharp = {},
   html = {},
   terraformls = {},
   tflint = {},
@@ -19,7 +20,7 @@ local servers = {
       python = {
         analysis = {
           autoSearchPaths = true,
-          diagnosticMode = "workspace",
+          diagnosticMode = "openFilesOnly", -- resources optimization
           useLibraryCodeForTypes = true,
         },
       },
@@ -29,12 +30,13 @@ local servers = {
     settings = {
       ["helm-ls"] = {
         yamlls = {
-          path = "yaml-language-server",
+          enabled = false, -- need this to disable embedded yamlls within helm_ls for power consumption
         },
       },
     },
   },
   yamlls = {
+    single_file_support = true, -- resource optimization
     settings = {
       redhat = {
         telemetry = {
@@ -85,3 +87,18 @@ for name, opts in pairs(servers) do
 
   require("lspconfig")[name].setup(opts)
 end
+
+-- Stop LSP clients when no buffers need them because LSP is hungry as fck
+-- when multiplexing
+vim.api.nvim_create_autocmd("BufDelete", {
+  callback = function(args)
+    local bufnr = args.buf
+    local clients = vim.lsp.get_clients { bufnr = bufnr }
+    for _, client in ipairs(clients) do
+      local bufs = vim.lsp.get_buffers_by_client_id(client.id)
+      if #bufs == 1 and bufs[1] == bufnr then
+        client.stop()
+      end
+    end
+  end,
+})
