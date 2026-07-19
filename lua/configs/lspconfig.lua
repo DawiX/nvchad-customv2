@@ -102,3 +102,20 @@ vim.api.nvim_create_autocmd("BufDelete", {
     end
   end,
 })
+
+-- Stop LSPs after 30 minutes of inactivity
+local lsp_idle_timer = nil
+local function reset_lsp_idle_timer()
+  if lsp_idle_timer then
+    lsp_idle_timer:stop()
+  end
+  lsp_idle_timer = vim.defer_fn(function()
+    for _, client in ipairs(vim.lsp.get_clients()) do
+      client.stop()
+    end
+  end, 1800000) -- 30 minutes
+end
+
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved", "InsertEnter" }, {
+  callback = reset_lsp_idle_timer,
+})
