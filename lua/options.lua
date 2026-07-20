@@ -16,7 +16,6 @@ vim.g.terraform_fmt_on_save = 1
 
 vim.o.shell = "/opt/homebrew/bin/fish"
 
-
 -- add yours here!
 
 -- local o = vim.o
@@ -27,15 +26,21 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     vim.defer_fn(function()
       local ok, colors = pcall(function()
-        return require("base46").get_theme_tb("base_30")
+        return require("base46").get_theme_tb "base_30"
       end)
       if ok and colors then
+        -- nvim-tree git colors
         vim.api.nvim_set_hl(0, "NvimTreeGitStagedIcon", { fg = colors.vibrant_green, bold = true })
         vim.api.nvim_set_hl(0, "NvimTreeGitFileStagedHL", { fg = colors.vibrant_green, bold = true })
         vim.api.nvim_set_hl(0, "NvimTreeGitDirtyIcon", { fg = colors.yellow, bold = true })
         vim.api.nvim_set_hl(0, "NvimTreeGitFileDirtyHL", { fg = colors.yellow, bold = true })
         vim.api.nvim_set_hl(0, "NvimTreeGitNewIcon", { fg = colors.vibrant_green, bold = true })
         vim.api.nvim_set_hl(0, "NvimTreeGitFileNewHL", { fg = colors.vibrant_green, bold = true })
+
+        -- gitsigns colors (in-buffer git indicators)
+        vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = colors.vibrant_green })
+        vim.api.nvim_set_hl(0, "GitSignsChange", { fg = colors.sun })
+        vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = colors.red })
       end
     end, 100)
   end,
