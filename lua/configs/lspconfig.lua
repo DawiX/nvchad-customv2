@@ -36,7 +36,6 @@ local servers = {
     },
   },
   yamlls = {
-    single_file_support = true, -- resource optimization
     settings = {
       redhat = {
         telemetry = {
@@ -80,13 +79,18 @@ local servers = {
   },
 }
 
+local names = {}
+
 for name, opts in pairs(servers) do
   opts.on_init = configs.on_init
   opts.on_attach = configs.on_attach
   opts.capabilities = configs.capabilities
 
-  require("lspconfig")[name].setup(opts)
+  vim.lsp.config(name, opts)
+  names[#names + 1] = name
 end
+
+vim.lsp.enable(names)
 
 -- Stop LSP clients when no buffers need them because LSP is hungry as fck
 -- when multiplexing

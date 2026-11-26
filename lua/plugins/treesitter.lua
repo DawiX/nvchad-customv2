@@ -17,6 +17,8 @@ return {
         "c_sharp",
         "json",
         "json5",
+        "markdown",
+        "markdown_inline",
         "terraform",
       },
     },
